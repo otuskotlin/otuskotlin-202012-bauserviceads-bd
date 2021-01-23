@@ -21,7 +21,7 @@ object App {
     }
 
     fun run() {
-        server.start(wait = true)
+        server.start(wait = false)
     }
 
     fun stop() {
@@ -29,6 +29,12 @@ object App {
     }
 }
 
-fun main(args: Array<String>) {
-    App.run()
+fun Application.main() {
+    embeddedServer(factory = Netty, port = 8080) {
+        routing {
+            get("/") {
+                call.respondText(text = "Hello Kotlin", contentType = ContentType.Text.Html)
+            }
+        }
+    }
 }

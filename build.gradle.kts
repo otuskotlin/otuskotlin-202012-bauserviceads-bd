@@ -24,8 +24,6 @@ subprojects {
         plugin("org.jetbrains.kotlin.jvm")
         plugin("io.qameta.allure")
         plugin("org.jlleitschuh.gradle.ktlint")
-        java
-        kotlin
     }
 
     repositories {

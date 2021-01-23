@@ -3,20 +3,37 @@
  */
 package builders.marketplace
 
-import io.kotest.assertions.ktor.*
 import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
+import io.kotest.matchers.string.shouldContain
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.get
+import io.ktor.client.request.post
+import io.ktor.client.request.url
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
+import io.ktor.util.url
+import kotlinx.coroutines.runBlocking
 
-class AppTest: AnnotationSpec() {
+class AppTest : AnnotationSpec() {
 
     override fun beforeTest(testCase: TestCase) {
         App.run()
     }
 
     @Test
-    fun testAppHasAGreeting() {
-        val client = HttpClient(CIO)
+    fun testAppHasAGreeting() = runBlocking {
+        val client = HttpClient()
+
+        val message = client.get<String> {
+            url("http://127.0.0.1:8080/")
+            HttpRequestBuilder
+        }
+
+        message shouldContain "Hello Kotlin"
     }
 
     override fun afterTest(testCase: TestCase, result: TestResult) {
