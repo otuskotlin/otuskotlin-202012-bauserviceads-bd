@@ -3,38 +3,22 @@
  */
 package builders.marketplace
 
+import builders.marketplace.routes.registerCustomerRoutes
 import io.ktor.application.*
+import io.ktor.features.ContentNegotiation
 import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import io.ktor.serialization.json
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import java.util.concurrent.TimeUnit.SECONDS
 
-object App {
-    private val server = embeddedServer(factory = Netty, port = 8080) {
-        routing {
-            get("/") {
-                call.respondText(text = "Hello Kotlin", contentType = ContentType.Text.Html)
-            }
-        }
-    }
+fun main(args: Array<String>): Unit = EngineMain.main(args)
 
-    fun run() {
-        server.start(wait = false)
+fun Application.module() {
+    install(ContentNegotiation) {
+        json()
     }
-
-    fun stop() {
-        server.stop(gracePeriod = 1, timeout = 1, timeUnit = SECONDS)
-    }
-}
-
-fun Application.main() {
-    embeddedServer(factory = Netty, port = 8080) {
-        routing {
-            get("/") {
-                call.respondText(text = "Hello Kotlin", contentType = ContentType.Text.Html)
-            }
-        }
-    }
+    registerCustomerRoutes()
 }

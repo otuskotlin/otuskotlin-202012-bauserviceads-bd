@@ -13,6 +13,8 @@ plugins {
 
 val ktorVersion = "1.5.0"
 val kotestVersion = "4.3.2"
+val logbackVersion = "1.2.3"
+val kotlin_serialization = "0.20.0"
 
 allure {
     autoconfigure = false
@@ -39,6 +41,9 @@ subprojects {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         implementation("io.ktor:ktor-server-core:$ktorVersion")
         implementation("io.ktor:ktor-server-netty:$ktorVersion")
+        implementation("ch.qos.logback:logback-classic:$logbackVersion")
+        implementation("io.ktor:ktor-serialization:$ktorVersion")
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$kotlin_serialization")
 
         // This dependency is used by the application.
         implementation("com.google.guava:guava:29.0-jre")
