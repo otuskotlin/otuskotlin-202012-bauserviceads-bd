@@ -2,6 +2,7 @@ package builders.marketplace.modelsTests
 
 import builders.marketplace.dsl.user
 import builders.marketplace.models.Role.USER
+import com.google.gson.Gson
 import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe

@@ -14,7 +14,8 @@ plugins {
 val ktorVersion = "1.5.0"
 val kotestVersion = "4.3.2"
 val logbackVersion = "1.2.3"
-val kotlin_serialization = "0.20.0"
+val kotlinSerialization = "0.20.0"
+val config4kVersion = "0.4.2"
 
 allure {
     autoconfigure = false
@@ -37,16 +38,17 @@ subprojects {
         // Align versions of all Kotlin components
         implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
-        // Use the Kotlin JDK 8 standard library.
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         implementation("io.ktor:ktor-server-core:$ktorVersion")
         implementation("io.ktor:ktor-server-netty:$ktorVersion")
-        implementation("ch.qos.logback:logback-classic:$logbackVersion")
         implementation("io.ktor:ktor-serialization:$ktorVersion")
-        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$kotlin_serialization")
+        implementation("io.ktor:ktor-gson:$ktorVersion")
+
+        implementation("io.github.config4k:config4k:$config4kVersion")
+        implementation("ch.qos.logback:logback-classic:$logbackVersion")
 
         // This dependency is used by the application.
         implementation("com.google.guava:guava:29.0-jre")
+        implementation("com.google.code.gson:gson:2.8.6")
 
         testImplementation("io.kotest:kotest-assertions-ktor:$kotestVersion")
         testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
