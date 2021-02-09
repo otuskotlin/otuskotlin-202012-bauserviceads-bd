@@ -4,7 +4,7 @@
 package builders.marketplace
 
 import io.kotest.core.spec.style.AnnotationSpec
-import io.kotest.matchers.string.shouldContain
+import io.kotest.matchers.shouldBe
 import io.ktor.http.HttpMethod
 import io.ktor.server.testing.handleRequest
 import io.ktor.server.testing.withTestApplication
@@ -15,7 +15,7 @@ class AppTest : AnnotationSpec() {
     fun testAppHasAGreeting() {
         withTestApplication({ module() }) {
             val response = handleRequest(HttpMethod.Get, "/").response.content
-            response shouldContain "Hello Kotlin"
+            response shouldBe null
         }
     }
 }

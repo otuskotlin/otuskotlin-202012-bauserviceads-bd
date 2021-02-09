@@ -15,7 +15,7 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import java.util.concurrent.TimeUnit.SECONDS
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 fun Application.module() {
     install(ContentNegotiation) {
