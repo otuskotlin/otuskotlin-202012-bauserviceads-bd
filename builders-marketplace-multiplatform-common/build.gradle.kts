@@ -7,17 +7,13 @@ plugins {
 group = rootProject.group
 version = rootProject.version
 
-val logbackVersion: String by project
-val kotestVersion: String by project
-
 repositories {
     mavenCentral()
 }
 
 kotlin {
-    /* Targets configuration omitted. 
-    *  To find out how to configure the targets, please follow the link:
-    *  https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html#setting-up-targets */
+    val logbackVersion: String by project
+    val kotestVersion: String by project
 
     js {
         browser()
@@ -73,7 +69,6 @@ kotlin {
                 implementation(kotlin("test-junit"))
                 implementation("io.kotest:kotest-assertions-ktor:$kotestVersion")
                 implementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
-
             }
         }
     }

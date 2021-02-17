@@ -7,24 +7,20 @@ plugins {
 group = rootProject.group
 version = rootProject.version
 
-val ktorVersion: String by project
-val kotestVersion: String by project
-
-val config4kVersion: String by project
-
-val allureVersion: String by project
-
-val logbackVersion: String by project
-
-val guavaVersion: String by project
-val gsonVersion: String by project
-
 allure {
+    val allureVersion: String by project
     autoconfigure = false
     version = allureVersion
 }
 
 dependencies {
+    val ktorVersion: String by project
+    val kotestVersion: String by project
+    val config4kVersion: String by project
+    val logbackVersion: String by project
+    val guavaVersion: String by project
+    val gsonVersion: String by project
+
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
