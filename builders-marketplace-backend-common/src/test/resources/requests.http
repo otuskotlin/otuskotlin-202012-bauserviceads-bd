@@ -1,0 +1,32 @@
+POST http://localhost:8080/customers
+Content-Type: application/json
+
+{
+  "id": "",
+  "name": {
+    "firstName": "John",
+    "secondName": "",
+    "lastName": "Doe"
+  },
+  "dateOfBirth": {
+    "year": 2002,
+    "month": 1,
+    "day": 1
+  },
+  "contacts": {
+    "email": "john.doe@builders.market.com",
+    "phoneNumber": "+441234567890"
+  },
+  "address": {
+    "postCode": "SE1 2QN",
+    "firstLine": "Tower Bridge",
+    "secondLine": "",
+    "city": "London",
+    "country": "UK"
+  },
+  "role": [
+    "USER"
+  ]
+}
+
+###
