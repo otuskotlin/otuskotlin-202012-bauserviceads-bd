@@ -1,4 +1,4 @@
-package builders.marketplace.models
+package builders.marketplace.models.user
 
 data class Name(
     val firstName: String = "",

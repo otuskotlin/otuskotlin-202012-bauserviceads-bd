@@ -1,16 +1,17 @@
-package builders.marketplace.dsl
+package builders.marketplace.dsl.user
 
-import builders.marketplace.models.Address
-import builders.marketplace.models.Contacts
-import builders.marketplace.models.Name
-import builders.marketplace.models.Role
-import builders.marketplace.models.UserId
-import builders.marketplace.models.UserModel
+import builders.marketplace.models.user.Address
+import builders.marketplace.models.user.Contacts
+import builders.marketplace.models.user.Name
+import builders.marketplace.models.user.Role
+import builders.marketplace.models.user.UserId
+import builders.marketplace.models.user.UserModel
 import java.time.LocalDate
 
 class UserConfig {
     private var id: UserId = UserId.NONE
     private lateinit var name: Name
+    private lateinit var nick: String
     private lateinit var dob: LocalDate
     private var contacts: Contacts = Contacts()
     private var address: Address = Address()
@@ -21,11 +22,18 @@ class UserConfig {
             .apply(block)
             .run {
                 name = Name(
-                    firstName = this.firstName,
-                    secondName = this.secondName,
-                    lastName = this.lastName
+                        firstName = this.firstName,
+                        secondName = this.secondName,
+                        lastName = this.lastName
                 )
             }
+
+    fun nickname(block: NickNameConfig.() -> Unit) =
+            NickNameConfig()
+                    .apply(block)
+                    .run {
+                        nick = this.nickname
+                    }
 
     fun dateOfBirth(block: DateOfBirthConfig.() -> Unit) =
         DateOfBirthConfig()
@@ -39,11 +47,11 @@ class UserConfig {
             .apply(block)
             .run {
                 address = Address(
-                    postCode = this.postCode,
-                    firstLine = this.firstLine,
-                    secondLine = this.secondLine,
-                    city = this.city,
-                    country = this.country
+                        postCode = this.postCode,
+                        firstLine = this.firstLine,
+                        secondLine = this.secondLine,
+                        city = this.city,
+                        country = this.country
                 )
             }
 
@@ -52,8 +60,8 @@ class UserConfig {
             .apply(block)
             .run {
                 contacts = Contacts(
-                    email = email,
-                    phoneNumber = phoneNumber
+                        email = email,
+                        phoneNumber = phoneNumber
                 )
             }
 
@@ -65,12 +73,13 @@ class UserConfig {
             }
 
     fun build() = UserModel(
-        id = this.id,
-        name = this.name,
-        dateOfBirth = this.dob,
-        contacts = this.contacts,
-        address = this.address,
-        role = this.role
+            id = this.id,
+            name = this.name,
+            nickname = this.nick,
+            dateOfBirth = this.dob,
+            contacts = this.contacts,
+            address = this.address,
+            role = this.role
     )
 }
 

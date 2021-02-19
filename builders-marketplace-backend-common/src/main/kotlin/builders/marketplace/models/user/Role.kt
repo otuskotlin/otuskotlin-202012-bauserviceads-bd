@@ -1,4 +1,4 @@
-package builders.marketplace.models
+package builders.marketplace.models.user
 
 enum class Role {
     USER,

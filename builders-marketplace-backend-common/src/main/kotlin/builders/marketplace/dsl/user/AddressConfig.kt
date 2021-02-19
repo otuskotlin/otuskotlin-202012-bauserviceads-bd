@@ -1,4 +1,4 @@
-package builders.marketplace.dsl
+package builders.marketplace.dsl.user
 
 class AddressConfig {
     lateinit var postCode: String

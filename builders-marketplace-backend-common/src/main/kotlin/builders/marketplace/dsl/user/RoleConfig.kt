@@ -1,6 +1,6 @@
-package builders.marketplace.dsl
+package builders.marketplace.dsl.user
 
-import builders.marketplace.models.Role
+import builders.marketplace.models.user.Role
 
 class RoleConfig {
     private val _roles = mutableSetOf<Role>()

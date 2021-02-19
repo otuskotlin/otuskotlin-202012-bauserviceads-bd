@@ -1,4 +1,4 @@
-package builders.marketplace.models
+package builders.marketplace.models.user
 
 @Suppress("EXPERIMENTAL_FEATURE_WARNING")
 inline class UserId(val id: String) {

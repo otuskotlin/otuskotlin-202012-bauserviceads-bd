@@ -1,4 +1,4 @@
-package builders.marketplace.models
+package builders.marketplace.models.user
 
 data class Contacts(
     val email: String = "",

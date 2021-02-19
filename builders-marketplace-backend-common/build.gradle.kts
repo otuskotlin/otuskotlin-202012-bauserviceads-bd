@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     kotlin("jvm")
     id("io.qameta.allure")
@@ -44,4 +46,9 @@ dependencies {
 tasks.named<Test>("test") { // or "jvmTest" etc
     useJUnitPlatform()
     systemProperty("allure.results.directory", project.buildDir.toString() + "/allure-results")
+}
+
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    freeCompilerArgs = listOf("-XXLanguage:+InlineClasses")
 }
