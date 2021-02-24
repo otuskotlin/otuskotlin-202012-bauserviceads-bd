@@ -1,6 +1,5 @@
-package builders.marketplace.transport.multiplatform.models.common
+package builders.marketplace.transport.multiplatform.models.advert.options
 
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 
 @Serializable

@@ -5,5 +5,6 @@ data class Address(
     val firstLine: String = "",
     val secondLine: String = "",
     val city: String = "",
+    val county: String = "",
     val country: String = ""
 )

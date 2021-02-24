@@ -1,4 +1,4 @@
-package builders.marketplace.transport.multiplatform.models.advert
+package builders.marketplace.transport.multiplatform.models.advert.request
 
 import builders.marketplace.transport.multiplatform.models.common.IMarketplaceDebug
 import builders.marketplace.transport.multiplatform.models.common.IMarketplaceRequest
@@ -7,8 +7,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-@SerialName("MarketplaceRequestBuyAdvertRead")
-data class MarketplaceRequestBuyAdvertRead(
+@SerialName("RequestAdvertRead")
+data class RequestAdvertRead(
         override val requestId: String? = null,
         override val onResponse: String? = null,
         override val startTime: String? = null,
