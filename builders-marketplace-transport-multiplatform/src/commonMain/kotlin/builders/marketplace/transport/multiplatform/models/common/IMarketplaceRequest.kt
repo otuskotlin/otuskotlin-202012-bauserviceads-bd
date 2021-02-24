@@ -1,8 +1,8 @@
 package builders.marketplace.transport.multiplatform.models.common
 
-interface IMultiplatformRequest {
+interface IMarketplaceRequest {
     val requestId: String?
     val onResponse: String?
     val startTime: String?
-    val debug: IMultiplatformDebug?
+    val debug: IMarketplaceDebug?
 }

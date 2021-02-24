@@ -1,6 +1,6 @@
 package builders.marketplace.transport.multiplatform.models.common
 
-interface IMultiplatformAdvertCreateDto {
+interface IMarketplaceAdvertCreateDto {
     val name: String?
     val categories: Set<String>?
     val technicalCharacteristics: Set<Map<String,String>>?

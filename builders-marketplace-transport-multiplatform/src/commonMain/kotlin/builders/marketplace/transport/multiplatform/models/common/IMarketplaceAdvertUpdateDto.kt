@@ -1,6 +1,6 @@
 package builders.marketplace.transport.multiplatform.models.common
 
-interface IMultiplatformAdvertUpdateDto: IMultiplatformAdvertCreateDto {
+interface IMarketplaceAdvertUpdateDto: IMarketplaceAdvertCreateDto {
     val id: String?
     val lastTimeModifiedAt: Long?
 }

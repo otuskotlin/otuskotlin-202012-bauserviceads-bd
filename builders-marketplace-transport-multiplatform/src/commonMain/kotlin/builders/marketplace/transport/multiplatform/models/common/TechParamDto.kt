@@ -3,7 +3,7 @@ package builders.marketplace.transport.multiplatform.models.common
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 
-@Serializable(with = KSerializer::class)
+@Serializable
 class TechParamDto(
         val id: String? = null,
         val name: String? = null,

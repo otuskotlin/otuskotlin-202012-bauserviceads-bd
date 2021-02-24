@@ -1,6 +1,6 @@
 package builders.marketplace.transport.multiplatform.models.common
 
-enum class MultiplatformAdvertPermission {
+enum class MarkeplaceAdvertPermission {
     READ,
     UPDATE,
     DELETE

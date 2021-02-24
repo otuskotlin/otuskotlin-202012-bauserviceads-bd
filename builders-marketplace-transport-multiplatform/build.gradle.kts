@@ -1,8 +1,6 @@
-val kotlinSerialization: String by project
-
 plugins {
     kotlin("multiplatform")
-    kotlin("plugin.serialization") apply true
+    kotlin("plugin.serialization")
 }
 
 group = rootProject.group
@@ -13,8 +11,7 @@ repositories {
 }
 
 kotlin {
-    val logbackVersion: String by project
-    val kotestVersion: String by project
+    val kotlinSerialization: String by project
 
     js {
         browser()
@@ -42,7 +39,6 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-js"))
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:$coroutinesVersion")
             }
         }
         val jsTest by getting {
@@ -57,15 +53,12 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
             }
         }
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
-                implementation("io.kotest:kotest-assertions-ktor:$kotestVersion")
-                implementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
             }
         }
     }
