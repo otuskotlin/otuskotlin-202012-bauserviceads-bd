@@ -3,11 +3,12 @@ package builders.marketplace.transport.multiplatform.models.advert
 import builders.marketplace.transport.multiplatform.models.advert.options.AdvertType
 import builders.marketplace.transport.multiplatform.models.advert.options.LocationDto
 import builders.marketplace.transport.multiplatform.models.advert.options.TechParamDto
+import builders.marketplace.transport.multiplatform.models.advert.options.TechnicalDetailDto
 
 interface IMarketplaceAdvertCreateDto {
     val name: String?
     val categories: Set<String>?
-    val technicalCharacteristics: Set<TechParamDto>?
+    val technicalDetails: Set<TechnicalDetailDto>?
     val description: String?
     val ownerId: String?
     val createdAt: Long?

@@ -4,6 +4,7 @@ import builders.marketplace.transport.multiplatform.models.advert.options.Advert
 import builders.marketplace.transport.multiplatform.models.advert.options.LocationDto
 import builders.marketplace.transport.multiplatform.models.advert.options.MarkeplaceAdvertPermission
 import builders.marketplace.transport.multiplatform.models.advert.options.TechParamDto
+import builders.marketplace.transport.multiplatform.models.advert.options.TechnicalDetailDto
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -11,7 +12,7 @@ data class AdvertDto(
     override val id: String? = null,
     override val name: String? = null,
     override val categories: Set<String>? = null,
-    override val technicalCharacteristics: Set<TechParamDto>? = null,
+    override val technicalDetails: Set<TechnicalDetailDto>? = null,
     override val description: String? = null,
     override val ownerId: String? = null,
     override val createdAt: Long? = null,

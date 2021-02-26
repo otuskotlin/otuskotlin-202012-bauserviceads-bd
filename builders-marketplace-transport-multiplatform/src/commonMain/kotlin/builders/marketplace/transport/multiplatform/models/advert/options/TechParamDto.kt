@@ -9,4 +9,8 @@ class TechParamDto(
         val description: String? = null,
         val priority: Double? = null,
         val units: Set<UnitTypeDto>? = null,
-)
+) {
+        companion object {
+                val NONE = TechParamDto()
+        }
+}

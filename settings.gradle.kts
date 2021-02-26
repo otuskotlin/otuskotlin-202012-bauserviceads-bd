@@ -21,3 +21,4 @@ pluginManagement {
 include("builders-marketplace-backend-common")
 include("builders-marketplace-multiplatform-common")
 include("builders-marketplace-transport-multiplatform")
+include("builders-marketplace-backend-mappers")

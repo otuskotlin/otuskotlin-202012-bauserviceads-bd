@@ -23,20 +23,34 @@ internal class MarketplaceRequestSerializationTest {
     }
 
     private val request: MarketplaceMessage = RequestAdvertRead(
-            requestId = "advert-1"
+        requestId = "advert-1"
     )
 
     @Test
     fun marketplaceRequestSerializationTest() {
 
-        val serializedRequestTemplate = json.encodeToString(MarketplaceMessage.serializer(), request)
-        assertTrue(serializedRequestTemplate.contains("${(request as RequestAdvertRead).requestId}"))
+        val serializedRequest = json.encodeToString(MarketplaceMessage.serializer(), request)
+        println(serializedRequest)
+        assertTrue(serializedRequest.contains("${(request as RequestAdvertRead).requestId}"))
     }
 
     @Test
     fun marketplaceRequestDeserializationTest() {
-        val serializedRequestTemplate = json.encodeToString(MarketplaceMessage.serializer(), request)
-        val deserializedRequest = json.decodeFromString(MarketplaceMessage.serializer(), serializedRequestTemplate)
+        val serializedRequest = json.encodeToString(MarketplaceMessage.serializer(), request)
+        val deserializedRequest = json.decodeFromString(MarketplaceMessage.serializer(), serializedRequest)
         assertEquals("advert-1", (deserializedRequest as RequestAdvertRead).requestId)
+    }
+
+    @Test
+    fun marketplaceRequestShouldBeSerializedInCamelCase() {
+        val serializedRequestTemplate = json.encodeToString(MarketplaceMessage.serializer(), request)
+        val typeString =
+            """|"type": "RequestAdvertRead""""
+                .trimMargin()
+        val valueString =
+            """|"requestId": "advert-1""""
+                .trimMargin()
+        assertTrue { serializedRequestTemplate.contains(typeString) }
+        assertTrue { serializedRequestTemplate.contains(valueString) }
     }
 }
