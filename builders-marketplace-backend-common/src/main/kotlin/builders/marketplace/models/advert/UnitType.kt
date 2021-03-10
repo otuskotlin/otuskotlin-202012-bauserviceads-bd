@@ -1,12 +1,12 @@
 package builders.marketplace.models.advert
 
 data class UnitType(
-    val id: UnitTypeId,
-    val name: String,
-    val description: String,
-    val symbol: String,
-    val symbols: Set<String>,
-    val isBase: Boolean
+    val id: UnitTypeId = UnitTypeId.NONE,
+    val name: String = "",
+    val description: String = "",
+    val symbol: String = "",
+    val symbols: Set<String> = mutableSetOf(),
+    val isBase: Boolean = false
 ) {
     companion object {
         val NONE = UnitType(

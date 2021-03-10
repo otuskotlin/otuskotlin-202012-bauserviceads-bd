@@ -1,5 +1,3 @@
 package builders.marketplace.dsl.message
 
-class RecipientConfig {
-    lateinit var recipient: String
-}
+class RecipientConfig(var recipient: String = "")

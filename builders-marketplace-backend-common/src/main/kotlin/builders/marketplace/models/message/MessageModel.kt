@@ -7,12 +7,12 @@ import java.time.LocalDate
 
 data class MessageModel(
         val id: MessageId = MessageId.NONE,
-        val text: String,
-        val sentAt: LocalDate,
-        val readAt: LocalDate,
-        val author: UserId,
-        val recipient: UserId,
-        val chatId: ChatId,
-        val attachments: Set<S3ImagePath>
+        val text: String = "",
+        val sentAt: LocalDate = LocalDate.now(),
+        val readAt: LocalDate = LocalDate.now(),
+        val author: UserId = UserId.NONE,
+        val recipient: UserId = UserId.NONE,
+        val chatId: ChatId = ChatId.NONE,
+        val attachments: Set<S3ImagePath> = mutableSetOf()
 ) {
 }

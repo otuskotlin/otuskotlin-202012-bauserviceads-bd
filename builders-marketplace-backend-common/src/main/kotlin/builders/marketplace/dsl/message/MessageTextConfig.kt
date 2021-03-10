@@ -1,5 +1,3 @@
 package builders.marketplace.dsl.message
 
-class MessageTextConfig {
-    lateinit var text: String
-}
+class MessageTextConfig( var text: String = "")

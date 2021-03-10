@@ -17,7 +17,6 @@ import builders.marketplace.transport.multiplatform.models.advert.options.Techni
 import builders.marketplace.transport.multiplatform.models.advert.options.UnitTypeDto
 import builders.marketplace.transport.multiplatform.models.advert.request.RequestAdvertCreate
 import builders.marketplace.transport.multiplatform.models.advert.request.RequestAdvertRead
-import builders.marketplace.transport.multiplatform.models.advert.request.RequestAdvertUpdate
 
 fun AdvertBackendContext.respondTo(advertTransportData: RequestAdvertCreate) = apply {
     this.requestAdvert = advertTransportData.buyAdvertCreateData?.toInternalAdvertModel() ?: AdvertModel.NONE

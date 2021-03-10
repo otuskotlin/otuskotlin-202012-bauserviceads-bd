@@ -1,5 +1,3 @@
 package builders.marketplace.dsl.message
 
-class ChatConfig {
-    lateinit var chatId: String
-}
+class ChatConfig(var chatId: String = "")

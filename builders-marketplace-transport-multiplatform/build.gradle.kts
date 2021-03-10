@@ -23,9 +23,11 @@ kotlin {
 
     sourceSets {
         val coroutinesVersion: String by project
+        val bigNumVersion: String by project
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
+                implementation("com.ionspin.kotlin:bignum:$bigNumVersion")
                 api("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinSerialization")
             }
         }

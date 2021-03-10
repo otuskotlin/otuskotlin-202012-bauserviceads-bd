@@ -22,6 +22,7 @@ dependencies {
     val logbackVersion: String by project
     val guavaVersion: String by project
     val gsonVersion: String by project
+    val bigNumVersion: String by project
 
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
@@ -33,6 +34,8 @@ dependencies {
 
     implementation("io.github.config4k:config4k:$config4kVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
+
+    implementation("com.ionspin.kotlin:bignum:$bigNumVersion")
 
     // This dependency is used by the application.
     implementation("com.google.guava:guava:$guavaVersion")

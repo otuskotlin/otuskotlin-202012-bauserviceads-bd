@@ -15,7 +15,7 @@ data class AdvertModel(
         val lastTimeModifiedAt: Long = Instant.now().toEpochMilli(),
         val advertPermission: Set<AdvertPermission> = mutableSetOf(),
         val imagesS3Paths: Set<S3ImagePath> = mutableSetOf(),
-        val price: Double = 0.0,
+        val price: Money = Money.NONE,
         val quantity: Int = 0,
         val manufacturer: String = "",
         val countryOfOrigin: String = "",

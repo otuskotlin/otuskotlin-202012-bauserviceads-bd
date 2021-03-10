@@ -7,16 +7,16 @@ import builders.marketplace.models.message.MessageModel
 import builders.marketplace.models.user.UserId
 import java.time.LocalDate
 
-class MessageConfig {
-    private var id: String = MessageId.NONE.id
-    private lateinit var createdBy: String
-    private lateinit var receivedBy: String
-    private lateinit var conversation: String
-    private lateinit var messageText: String
-    private lateinit var sentAt: LocalDate
-    private lateinit var readAt: LocalDate
-    private lateinit var attachments: Set<S3ImagePath>
-
+class MessageConfig(
+    var id: String = MessageId.NONE.id,
+    private var createdBy: String = "",
+    private var receivedBy: String = "",
+    private var conversation: String = "",
+    private var messageText: String = "",
+    private var sentAt: LocalDate = LocalDate.MIN,
+    private var readAt: LocalDate = LocalDate.MIN,
+    private var attachments: Set<S3ImagePath> = mutableSetOf()
+) {
     fun text(block: MessageTextConfig.() -> Unit) =
             MessageTextConfig()
                     .apply(block)
