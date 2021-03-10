@@ -1,8 +1,8 @@
 package builders.marketplace.routes
 
-import builders.marketplace.models.UserId
-import builders.marketplace.models.UserModel
-import builders.marketplace.models.customerStorage
+import builders.marketplace.models.user.UserId
+import builders.marketplace.models.user.UserModel
+import builders.marketplace.models.user.customerStorage
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode

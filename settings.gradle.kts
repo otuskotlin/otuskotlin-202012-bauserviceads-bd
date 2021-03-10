@@ -8,6 +8,7 @@ pluginManagement {
         // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
         kotlin("jvm") version kotlinVersion apply false
         kotlin("multiplatform") version kotlinVersion apply false
+        kotlin("plugin.serialization") version kotlinVersion apply false
         id("io.qameta.allure") version allurePluginVersion apply false
         id("org.jlleitschuh.gradle.ktlint") version ktlintVersion apply false
 
@@ -19,3 +20,5 @@ pluginManagement {
 
 include("builders-marketplace-backend-common")
 include("builders-marketplace-multiplatform-common")
+include("builders-marketplace-transport-multiplatform")
+include("builders-marketplace-backend-mappers")
