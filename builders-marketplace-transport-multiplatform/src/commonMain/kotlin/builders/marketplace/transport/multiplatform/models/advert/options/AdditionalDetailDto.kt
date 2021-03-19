@@ -4,6 +4,7 @@ import builders.marketplace.transport.multiplatform.models.common.MarketplaceMes
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LocationDto(
-    val id: String?,
+data class AdditionalDetailDto(
+    val name: String? = null,
+    val description: String? = null
 ) : MarketplaceMessage()
