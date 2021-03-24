@@ -1,23 +1,28 @@
 package builders.marketplace.api.routes
 
-import builders.marketplace.api.service.AdvertService
-import builders.marketplace.transport.multiplatform.models.advert.request.RequestAdvertCreate
+import builders.marketplace.api.controllers.AdvertController
 import io.ktor.application.*
-import io.ktor.request.*
-import io.ktor.response.*
 import io.ktor.routing.*
 
-fun Application.registerAdvertRoutes() {
+fun Application.registerAdvertRoutes(advertController: AdvertController) {
     routing {
-        advertRoutes()
+        advertRoutes(advertController)
     }
 }
 
-fun Route.advertRoutes() {
+fun Route.advertRoutes(advertController: AdvertController) {
     route("/advert") {
-        post {
-            val requestAdvertCreate = call.receive(RequestAdvertCreate::class)
-            call.respond(AdvertService)
+        post("/create") {
+            advertController.create(this)
+        }
+        post("/read") {
+            advertController.read(this)
+        }
+        post("/update") {
+            advertController.update(this)
+        }
+        post("/delete") {
+            advertController.delete(this)
         }
     }
 }
