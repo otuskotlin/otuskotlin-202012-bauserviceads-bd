@@ -1,6 +1,6 @@
 package builders.marketplace.models.advert
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import java.math.BigDecimal
 import java.util.Currency
 import java.util.Locale.UK
 

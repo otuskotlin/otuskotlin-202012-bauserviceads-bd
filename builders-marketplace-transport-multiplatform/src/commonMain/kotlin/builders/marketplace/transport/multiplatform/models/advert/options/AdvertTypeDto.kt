@@ -1,6 +1,9 @@
 package builders.marketplace.transport.multiplatform.models.advert.options
 
-enum class AdvertType {
+import kotlinx.serialization.Serializable
+
+@Serializable
+enum class AdvertTypeDto {
     BUY,
     SELL,
     PROMOTED_BUY,

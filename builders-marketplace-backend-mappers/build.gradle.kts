@@ -26,6 +26,7 @@ dependencies {
     implementation(project(":builders-marketplace-transport-multiplatform"))
 
     testImplementation("io.kotest:kotest-assertions-ktor:$kotestVersion")
+    testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
     testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
 }
 

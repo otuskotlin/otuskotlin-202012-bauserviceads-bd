@@ -1,6 +1,9 @@
 package builders.marketplace.transport.multiplatform.models.advert.options
 
-enum class MarkeplaceAdvertPermission {
+import kotlinx.serialization.Serializable
+
+@Serializable
+enum class MarketplaceAdvertPermission {
     READ,
     UPDATE,
     DELETE

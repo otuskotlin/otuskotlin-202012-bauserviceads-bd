@@ -1,6 +1,7 @@
 package builders.marketplace.transport.multiplatform.models.advert.request
 
-import builders.marketplace.transport.multiplatform.models.advert.AdvertUpdateDto
+import builders.marketplace.transport.multiplatform.models.advert.AdvertDto
+import builders.marketplace.transport.multiplatform.models.common.IMarketplaceAdvert
 import builders.marketplace.transport.multiplatform.models.common.IMarketplaceDebug
 import builders.marketplace.transport.multiplatform.models.common.IMarketplaceRequest
 import builders.marketplace.transport.multiplatform.models.common.MarketplaceMessage
@@ -15,8 +16,8 @@ data class RequestAdvertUpdate(
     override val onResponse: String? = null,
     override val startTime: String? = null,
     override val debug: IMarketplaceDebug? = null,
-    val buyAdvertUpdateData: AdvertUpdateDto? = null
-) : IMarketplaceRequest, MarketplaceMessage() {
+    override val advert: AdvertDto? = null
+) : IMarketplaceRequest, IMarketplaceAdvert, MarketplaceMessage() {
 
     @Serializable
     data class Debug(

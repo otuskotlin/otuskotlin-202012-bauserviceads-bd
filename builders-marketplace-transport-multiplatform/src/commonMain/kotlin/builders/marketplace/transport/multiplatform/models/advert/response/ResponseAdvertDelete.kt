@@ -1,6 +1,7 @@
 package builders.marketplace.transport.multiplatform.models.advert.response
 
 import builders.marketplace.transport.multiplatform.models.advert.AdvertDto
+import builders.marketplace.transport.multiplatform.models.common.IMarketplaceAdvert
 import builders.marketplace.transport.multiplatform.models.common.IMarketplaceDebug
 import builders.marketplace.transport.multiplatform.models.common.IMarketplaceResponse
 import builders.marketplace.transport.multiplatform.models.common.MarketplaceMessage
@@ -19,9 +20,9 @@ data class ResponseAdvertDelete(
     override val errors: List<MultiplatformErrorDto>? = null,
     override val status: ResponseStatusDto? = null,
     override val debug: IMarketplaceDebug? = null,
-    val deleted: Boolean? = null,
-    val advert: AdvertDto? = null
-) : IMarketplaceResponse, MarketplaceMessage() {
+    override val advert: AdvertDto? = null,
+    val deleted: Boolean? = null
+) : IMarketplaceResponse, IMarketplaceAdvert, MarketplaceMessage() {
 
     @Serializable
     data class Debug(
