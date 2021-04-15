@@ -28,23 +28,31 @@ import java.time.Instant
 import java.util.*
 
 fun AdvertBackendContext.setQuery(requestAdvertRead: RequestAdvertRead) {
-    this.requestAdvertId = requestAdvertRead.advertId?.let { id -> AdvertId(id) } ?: AdvertId.NONE
+    copy(
+        requestAdvertId = requestAdvertRead.advertId?.let { id -> AdvertId(id) } ?: AdvertId.NONE
+    )
 }
 
 fun AdvertBackendContext.setQuery(requestAdvertCreate: RequestAdvertCreate) {
     requestAdvertCreate.advert?.let { advertCreateDto ->
-        requestAdvert = advertCreateDto.toInternalAdvertModel()
+        copy(
+            requestAdvert = advertCreateDto.toInternalAdvertModel()
+        )
     }
 }
 
 fun AdvertBackendContext.setQuery(requestAdvertUpdate: RequestAdvertUpdate) {
     requestAdvertUpdate.advert?.let { advertUpdateDto ->
-        this.requestAdvert = advertUpdateDto.toInternalAdvertModel()
+        copy(
+            requestAdvert = advertUpdateDto.toInternalAdvertModel()
+        )
     }
 }
 
 fun AdvertBackendContext.setQuery(requestAdvertDelete: RequestAdvertDelete) {
-    this.requestAdvertId = requestAdvertDelete.advertId?.let { id -> AdvertId(id) } ?: AdvertId.NONE
+    copy(
+        requestAdvertId = requestAdvertDelete.advertId?.let { id -> AdvertId(id) } ?: AdvertId.NONE
+    )
 }
 
 fun AdvertBackendContext.respondCreateAdvert() = ResponseAdvertCreate(
@@ -96,7 +104,8 @@ internal fun AdvertModel.toTransportModel() = AdvertDto(
                 id = locationId
             )
         }
-    }
+    },
+    deleted = deleted
 )
 
 fun AdvertDto.toInternalAdvertModel() = AdvertModel(
@@ -118,7 +127,7 @@ fun AdvertDto.toInternalAdvertModel() = AdvertModel(
         ?: setOf(),
     tags = tags?.map { tag -> Tag(tag) }?.toSet() ?: setOf(),
     advertPermission = permissions?.map { permission ->
-        when(permission.name) {
+        when (permission.name) {
             "READ" -> AdvertPermission.READ
             "UPDATE" -> AdvertPermission.UPDATE
             "DELETE" -> AdvertPermission.DELETE
@@ -126,7 +135,7 @@ fun AdvertDto.toInternalAdvertModel() = AdvertModel(
         }
     }?.toSet() ?: setOf(),
     lastTimeModifiedAt = lastTimeModifiedAt ?: Instant.now().epochSecond,
-    advertType = typeDto?.let { typeDto -> AdvertType.valueOf(typeDto.name)} ?: AdvertType.NA,
+    advertType = typeDto?.let { typeDto -> AdvertType.valueOf(typeDto.name) } ?: AdvertType.NA,
     price = price?.let { price -> Money(amount = BigDecimal.valueOf(price)) } ?: Money.NONE,
     location = location?.id?.let { id -> AdvertLocationId(locationId = id) }
         ?: AdvertLocationId.NONE

@@ -22,5 +22,6 @@ data class AdvertDto(
     override val lastTimeModifiedAt: Long? = null,
     override val price: Double? = null,
     override val location: LocationDto? = null,
-    override val typeDto: AdvertTypeDto? = null
+    override val typeDto: AdvertTypeDto? = null,
+    val deleted: Boolean? = false
 ) : IMarketplaceAdvertDto, IMarketplaceAdvertCreateDto, MarketplaceMessage()

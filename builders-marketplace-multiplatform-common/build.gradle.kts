@@ -25,11 +25,13 @@ kotlin {
 
     sourceSets {
         val coroutinesVersion: String by project
+        val ktDateTimeVersion: String by project
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
                 implementation(kotlin("stdlib-common"))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:$ktDateTimeVersion")
 
                 // Align versions of all Kotlin components
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")
