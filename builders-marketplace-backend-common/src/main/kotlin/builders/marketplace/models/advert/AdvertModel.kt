@@ -19,7 +19,8 @@ data class AdvertModel(
         val location: AdvertLocationId = AdvertLocationId.NONE,
         val tags: Set<Tag> = mutableSetOf(),
         val advertType: AdvertType = AdvertType.NA,
-        val views: Int = 0
+        val views: Int = 0,
+        val deleted: Boolean = false
 ) {
         companion object {
                 val NONE = AdvertModel()

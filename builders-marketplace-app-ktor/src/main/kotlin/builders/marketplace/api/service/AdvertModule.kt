@@ -1,16 +1,17 @@
 package builders.marketplace.api.service
 
 import builders.marketplace.api.config.jsonMapperConfig
-import builders.marketplace.api.controllers.AdvertController
 import builders.marketplace.api.routes.registerAdvertRoutes
 import builders.marketplace.api.routes.registerCustomerRoutes
+import builders.marketplace.business.logic.backend.AdvertCrud
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.serialization.*
 
 fun Application.module(testing: Boolean = false) {
-    val advertController = AdvertController()
+    val advertCrud = AdvertCrud()
+    val advertService = AdvertService(advertCrud)
 
     install(CORS) {
         method(HttpMethod.Options)
@@ -29,6 +30,6 @@ fun Application.module(testing: Boolean = false) {
             json = jsonMapperConfig,
         )
     }
-    registerAdvertRoutes(advertController)
+    registerAdvertRoutes(advertService)
     registerCustomerRoutes()
 }

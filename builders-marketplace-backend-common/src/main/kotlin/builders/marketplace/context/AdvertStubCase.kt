@@ -1,0 +1,13 @@
+package builders.marketplace.context
+
+enum class AdvertStubCase {
+    NONE,
+    ADVERT_CREATE_SUCCESS,
+    ADVERT_CREATE_FAILED,
+    ADVERT_UPDATE_SUCCESS,
+    ADVERT_UPDATE_FAILED,
+    ADVERT_READ_SUCCESS,
+    ADVERT_READ_FAILED,
+    ADVERT_DELETE_SUCCESS,
+    ADVERT_DELETE_FAILED
+}

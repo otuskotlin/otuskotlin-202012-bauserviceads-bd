@@ -1,5 +1,8 @@
 package builders.marketplace.api.controllers
 
+import builders.marketplace.api.routes.handleRoute
+import builders.marketplace.api.service.AdvertService
+import builders.marketplace.business.logic.backend.AdvertCrud
 import builders.marketplace.transport.multiplatform.models.advert.AdvertDto
 import builders.marketplace.transport.multiplatform.models.advert.options.AdditionalDetailDto
 import builders.marketplace.transport.multiplatform.models.advert.options.AdvertTypeDto
@@ -17,109 +20,34 @@ import builders.marketplace.transport.multiplatform.models.common.ResponseStatus
 import io.ktor.application.*
 import io.ktor.request.*
 import io.ktor.response.*
+import io.ktor.routing.*
 import io.ktor.util.pipeline.*
 import org.slf4j.LoggerFactory
 import java.time.Instant
 import java.util.*
 
-class AdvertController {
-    private val log = LoggerFactory.getLogger(this::class.java)
-
-    suspend fun create(pipelineContext: PipelineContext<Unit, ApplicationCall>) {
-        try {
-            val request = pipelineContext.call.receive<MarketplaceMessage>() as RequestAdvertCreate
-            val response = ResponseStub.respond(request)
-            pipelineContext.call.respond(response)
-        } catch (e: Throwable) {
-            log.error("Failed to read request", e)
+fun Route.advertRoutes(advertService: AdvertService) {
+    route("/advert") {
+        post("/create") {
+            handleRoute<RequestAdvertCreate, ResponseAdvertCreate> { query ->
+                advertService.create(this, query)
+            }
         }
-    }
-
-    suspend fun read(pipelineContext: PipelineContext<Unit, ApplicationCall>) {
-        try {
-            val request = pipelineContext.call.receive<MarketplaceMessage>() as RequestAdvertRead
-            val response = ResponseStub.respond(request)
-            pipelineContext.call.respond(response)
-        } catch (e: Throwable) {
-            log.error("Failed to read request", e)
+        post("/read") {
+            handleRoute<RequestAdvertRead, ResponseAdvertRead> { query ->
+                advertService.read(this, query)
+            }
         }
-    }
-
-    suspend fun update(pipelineContext: PipelineContext<Unit, ApplicationCall>) {
-        try {
-            val request = pipelineContext.call.receive<MarketplaceMessage>() as RequestAdvertUpdate
-            val response = ResponseStub.respond(request)
-            pipelineContext.call.respond(response)
-        } catch (e: Throwable) {
-            log.error("Failed to read request", e)
+        post("/update") {
+            handleRoute<RequestAdvertUpdate, ResponseAdvertUpdate> { query ->
+                advertService.update(this, query)
+            }
         }
-    }
-
-    suspend fun delete(pipelineContext: PipelineContext<Unit, ApplicationCall>) {
-        try {
-            val request = pipelineContext.call.receive<MarketplaceMessage>() as RequestAdvertDelete
-            val response = ResponseStub.respond(request)
-            pipelineContext.call.respond(response)
-        } catch (e: Throwable) {
-            log.error("Failed to read request", e)
-        }
-    }
-
-    object ResponseStub {
-        val advertStub: AdvertDto = AdvertDto(
-            name = "Test advert",
-            categories = setOf("1", "2", "3"),
-            additionalDetails = setOf(
-                AdditionalDetailDto(
-                    name = "Property",
-                    description = "houses only"
-                )
-            ),
-            description = "Damp proofing required on ground floor",
-            ownerId = UUID.randomUUID().toString(),
-            createdAt = Instant.now().epochSecond,
-            imagesS3Paths = setOf("file://dummypath/image.jpg"),
-            tags = setOf("dampproofing", "roofing"),
-            price = 250.0,
-            location = LocationDto(
-                id = "2"
-            ),
-            typeDto = AdvertTypeDto.SELL
-        )
-
-        inline fun <reified T> respond(request: T): MarketplaceMessage {
-            return when (request) {
-                is RequestAdvertCreate -> ResponseAdvertCreate(
-                    responseId = "1",
-                    onRequest = request.requestId,
-                    endTime = Instant.now().toString(),
-                    status = ResponseStatusDto.SUCCESS,
-                    advert = advertStub
-                )
-                is RequestAdvertRead -> ResponseAdvertRead(
-                    responseId = "1",
-                    onRequest = request.requestId,
-                    endTime = Instant.now().toString(),
-                    status = ResponseStatusDto.SUCCESS,
-                    advert = advertStub
-                )
-                is RequestAdvertUpdate -> ResponseAdvertUpdate(
-                    responseId = "1",
-                    onRequest = request.requestId,
-                    endTime = Instant.now().toString(),
-                    status = ResponseStatusDto.SUCCESS,
-                    advert = advertStub.copy(tags = setOf("dampproofing", "roofing", "joinery"))
-                )
-                is RequestAdvertDelete -> ResponseAdvertDelete(
-                    responseId = "1",
-                    onRequest = request.requestId,
-                    endTime = Instant.now().toString(),
-                    status = ResponseStatusDto.SUCCESS,
-                    advert = advertStub,
-                    deleted = true
-                )
-                else -> throw IllegalArgumentException("Incorrect request")
+        post("/delete") {
+            handleRoute<RequestAdvertDelete, ResponseAdvertDelete> { query ->
+                advertService.delete(this, query)
             }
         }
     }
 }
+
