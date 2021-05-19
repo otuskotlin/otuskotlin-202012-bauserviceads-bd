@@ -45,3 +45,4 @@ internal fun Set<AdvertPermission>.handle(): Set<MarketplaceAdvertPermission>? =
     this.takeIf { advertPermissions -> advertPermissions.isNotEmpty() }
         ?.map { advertPermission -> MarketplaceAdvertPermission.valueOf(advertPermission.name) }
         ?.toSet()
+

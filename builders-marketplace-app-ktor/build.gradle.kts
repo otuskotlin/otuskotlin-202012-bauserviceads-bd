@@ -1,10 +1,15 @@
 plugins {
+    application
     kotlin("jvm")
     id("io.qameta.allure")
 }
 
 group = rootProject.group
 version = rootProject.version
+
+application {
+    mainClassName = "io.ktor.server.netty.EngineMain"
+}
 
 allure {
     val allureVersion: String by project
@@ -21,6 +26,8 @@ dependencies {
     val kotestVersion: String by project
     val config4kVersion: String by project
     val logbackVersion: String by project
+    val ktorKafkaVersion: String by project
+    val kafkaVersion: String by project
 
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
@@ -38,6 +45,9 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
 
     implementation("io.github.config4k:config4k:$config4kVersion")
+
+    implementation("com.github.Datana-company:ktor-kafka:$ktorKafkaVersion")
+    implementation("org.apache.kafka:kafka-clients:$kafkaVersion")
 
     testImplementation("io.kotest:kotest-assertions-ktor:$kotestVersion")
     testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")

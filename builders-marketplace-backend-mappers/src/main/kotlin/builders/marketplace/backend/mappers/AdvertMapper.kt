@@ -1,6 +1,8 @@
 package builders.marketplace.backend.mappers
 
 import builders.marketplace.context.AdvertBackendContext
+import builders.marketplace.context.AdvertBackendContextStatus
+import builders.marketplace.context.AdvertStubCase
 import builders.marketplace.models.advert.AdditionalDetail
 import builders.marketplace.models.advert.AdvertId
 import builders.marketplace.models.advert.AdvertLocationId
@@ -23,6 +25,7 @@ import builders.marketplace.transport.multiplatform.models.advert.response.Respo
 import builders.marketplace.transport.multiplatform.models.advert.response.ResponseAdvertDelete
 import builders.marketplace.transport.multiplatform.models.advert.response.ResponseAdvertRead
 import builders.marketplace.transport.multiplatform.models.advert.response.ResponseAdvertUpdate
+import builders.marketplace.transport.multiplatform.models.common.ResponseStatusDto
 import java.math.BigDecimal
 import java.time.Instant
 import java.util.*
@@ -31,6 +34,10 @@ fun AdvertBackendContext.setQuery(requestAdvertRead: RequestAdvertRead) {
     copy(
         requestAdvertId = requestAdvertRead.advertId?.let { id -> AdvertId(id) } ?: AdvertId.NONE
     )
+    stubCase = when (requestAdvertRead.debug?.stubCase) {
+        RequestAdvertRead.StubCase.SUCCESS -> AdvertStubCase.ADVERT_READ_SUCCESS
+        else -> AdvertStubCase.NONE
+    }
 }
 
 fun AdvertBackendContext.setQuery(requestAdvertCreate: RequestAdvertCreate) {
@@ -38,6 +45,10 @@ fun AdvertBackendContext.setQuery(requestAdvertCreate: RequestAdvertCreate) {
         copy(
             requestAdvert = advertCreateDto.toInternalAdvertModel()
         )
+    }
+    stubCase = when (requestAdvertCreate.debug?.stubCase) {
+        RequestAdvertCreate.StubCase.SUCCESS -> AdvertStubCase.ADVERT_CREATE_SUCCESS
+        else -> AdvertStubCase.NONE
     }
 }
 
@@ -47,18 +58,27 @@ fun AdvertBackendContext.setQuery(requestAdvertUpdate: RequestAdvertUpdate) {
             requestAdvert = advertUpdateDto.toInternalAdvertModel()
         )
     }
+    stubCase = when (requestAdvertUpdate.debug?.stubCase) {
+        RequestAdvertUpdate.StubCase.SUCCESS -> AdvertStubCase.ADVERT_UPDATE_SUCCESS
+        else -> AdvertStubCase.NONE
+    }
 }
 
 fun AdvertBackendContext.setQuery(requestAdvertDelete: RequestAdvertDelete) {
     copy(
         requestAdvertId = requestAdvertDelete.advertId?.let { id -> AdvertId(id) } ?: AdvertId.NONE
     )
+    stubCase = when (requestAdvertDelete.debug?.stubCase) {
+        RequestAdvertDelete.StubCase.SUCCESS -> AdvertStubCase.ADVERT_DELETE_SUCCESS
+        else -> AdvertStubCase.NONE
+    }
 }
 
 fun AdvertBackendContext.respondCreateAdvert() = ResponseAdvertCreate(
     responseId = UUID.randomUUID().toString(),
     onRequest = this.requestAdvertId.id,
     endTime = Instant.now().toString(),
+    status = this.status.toResponseStatusModel(),
     advert = this.advertResponse.takeIf { advert -> advert != AdvertModel.NONE }?.toTransportModel()
 )
 
@@ -66,6 +86,7 @@ fun AdvertBackendContext.respondReadAdvert() = ResponseAdvertRead(
     responseId = UUID.randomUUID().toString(),
     onRequest = this.requestAdvertId.id,
     endTime = Instant.now().toString(),
+    status = this.status.toResponseStatusModel(),
     advert = this.advertResponse.takeIf { advert -> advert != AdvertModel.NONE }?.toTransportModel()
 )
 
@@ -73,6 +94,7 @@ fun AdvertBackendContext.respondUpdateAdvert() = ResponseAdvertUpdate(
     responseId = UUID.randomUUID().toString(),
     onRequest = this.requestAdvertId.id,
     endTime = Instant.now().toString(),
+    status = this.status.toResponseStatusModel(),
     advert = this.advertResponse.takeIf { advert -> advert != AdvertModel.NONE }?.toTransportModel()
 )
 
@@ -80,6 +102,7 @@ fun AdvertBackendContext.respondDeleteAdvert() = ResponseAdvertDelete(
     responseId = UUID.randomUUID().toString(),
     onRequest = this.requestAdvertId.id,
     endTime = Instant.now().toString(),
+    status = this.status.toResponseStatusModel(),
     advert = this.advertResponse.takeIf { advert -> advert != AdvertModel.NONE }?.toTransportModel()
 )
 
@@ -140,3 +163,15 @@ fun AdvertDto.toInternalAdvertModel() = AdvertModel(
     location = location?.id?.let { id -> AdvertLocationId(locationId = id) }
         ?: AdvertLocationId.NONE
 )
+
+fun AdvertBackendContextStatus.toResponseStatusModel(): ResponseStatusDto {
+    return this.name.run {
+        when (name) {
+            AdvertBackendContextStatus.NONE.name -> ResponseStatusDto.NONE
+            AdvertBackendContextStatus.FINISHING.name -> ResponseStatusDto.SUCCESS
+            AdvertBackendContextStatus.SUCCESS.name -> ResponseStatusDto.SUCCESS
+            AdvertBackendContextStatus.ERROR.name -> ResponseStatusDto.FAILED
+            else -> ResponseStatusDto.NONE
+        }
+    }
+}
