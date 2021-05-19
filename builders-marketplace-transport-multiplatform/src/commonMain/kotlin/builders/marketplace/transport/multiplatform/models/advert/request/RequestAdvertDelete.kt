@@ -13,12 +13,19 @@ data class RequestAdvertDelete(
     override val requestId: String? = null,
     override val onResponse: String? = null,
     override val startTime: String? = null,
-    override val debug: IMarketplaceDebug? = null,
+    override val debug: Debug? = null,
     val advertId: String? = null
 ) : IMarketplaceRequest, MarketplaceMessage() {
 
     @Serializable
     data class Debug(
-        override val operationMode: MarketplaceOperationModeDto? = null
+        override val operationMode: MarketplaceOperationModeDto? = null,
+        val stubCase: StubCase? = null
     ) : IMarketplaceDebug
+
+    @Serializable
+    enum class StubCase {
+        NONE,
+        SUCCESS
+    }
 }

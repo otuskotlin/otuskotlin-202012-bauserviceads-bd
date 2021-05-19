@@ -9,7 +9,9 @@ subprojects {
 
     repositories {
         // Use JCenter for resolving dependencies.
-        jcenter()
+        mavenCentral()
+        maven { url = uri("https://repo.spring.io/milestone") }
+        maven { url = uri("https://jitpack.io") }
     }
 
     tasks.withType<KotlinCompile> {

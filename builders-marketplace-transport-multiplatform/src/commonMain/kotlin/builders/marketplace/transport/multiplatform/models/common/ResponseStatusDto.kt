@@ -6,5 +6,7 @@ import kotlinx.serialization.Serializable
 enum class ResponseStatusDto {
     SUCCESS,
     BAD_REQUEST,
-    NOT_FOUND
+    NOT_FOUND,
+    FAILED,
+    NONE
 }
